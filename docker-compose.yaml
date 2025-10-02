@@ -1,0 +1,51 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - DATABASE_URL=
+    container_name: app
+    ports:
+      - '${APP_PORT}:${APP_PORT}'
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DB_HOST}:${DB_PORT}/${POSTGRES_DB}
+      - PORT=${APP_PORT}
+      - HOST=${APP_HOST}
+      - ORIGIN=${APP_ORIGIN}
+    depends_on:
+      personal-web-db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  personal-web-db:
+    image: postgres:17-alpine
+    container_name: db
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
