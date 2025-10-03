@@ -13,6 +13,8 @@ export const load = (async ({ params, fetch, url }) => {
 	}
 
 	return {
-		blog: getBlog()
+		blog: getBlog(),
+		title: await getBlog().then((blog) => blog.title),
+		description: await getBlog().then((blog) => blog.description)
 	};
 }) satisfies PageServerLoad;
