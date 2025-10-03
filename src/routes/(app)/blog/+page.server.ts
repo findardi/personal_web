@@ -12,6 +12,9 @@ export const load = (async ({ fetch, url }) => {
 
 	return {
 		blogs: data.blogs as blogType[],
-		metadata: data.metadata
+		metadata: data.metadata,
+		title: 'Blogs',
+		description:
+			'Collection of articles and tutorials about web development, programming tips, and tech explorations by Ardi Sasongko'
 	};
 }) satisfies PageServerLoad;

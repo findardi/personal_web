@@ -22,6 +22,8 @@ export const load = (async ({ fetch, params }) => {
 
 	return {
 		form: await superValidate(formData, zod(blogSchema)),
-		currentBanner: blog.banner
+		currentBanner: blog.banner,
+		title: `Edit ${blog.title}`,
+		description: `Edit ${blog.description}`
 	};
 }) satisfies PageServerLoad;

@@ -74,7 +74,7 @@
 						data-aos="fade-up"
 						data-aos-delay="200"
 					>
-						Hola, Cukuruk || UPDATE TEST
+						Hola, Cukuruk
 					</h1>
 					<p
 						class="mx-auto max-w-3xl text-justify font-jost text-base leading-relaxed text-base-content/70 md:mx-0 md:text-lg lg:text-xl"

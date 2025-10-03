@@ -6,7 +6,9 @@ import { isRedirect, redirect } from '@sveltejs/kit';
 
 export const load = (async () => {
 	return {
-		form: await superValidate(zod(blogSchema))
+		form: await superValidate(zod(blogSchema)),
+		title: 'Create Blog',
+		description: 'Create new blog by Ardi Sasongko'
 	};
 }) satisfies PageServerLoad;
 
