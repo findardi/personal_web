@@ -20,10 +20,19 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       # Build & Push dengan tag "prod"
-      - name: Build and Push Docker image (prod tag)
+      - name: Build and Push Docker image Frontend(prod tag)
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./web
+          file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-web-app:prod
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-web/web:prod
+
+      # Build & Push dengan tag "prod"
+      - name: Build and Push Docker image Backend(prod tag)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./server
+          file: Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-web/server:prod
