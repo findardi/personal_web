@@ -26,7 +26,7 @@ jobs:
           context: ./web
           file: ./web/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-web/web:prod
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-web-web:prod
 
       # Build & Push dengan tag "prod"
       - name: Build and Push Docker image Backend(prod tag)
@@ -35,4 +35,4 @@ jobs:
           context: ./server
           file: ./server/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-web/server:prod
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-web-server:prod
